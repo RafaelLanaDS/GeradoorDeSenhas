@@ -1,0 +1,396 @@
+/* =====================
+   Tema Claro (padrão)
+   ===================== */
+:root,
+[data-tema="claro"] {
+  --bg-pagina:    #f0f0f0;
+  --bg-card:      #ffffff;
+  --bg-campo:     #f5f5f5;
+  --bg-campo-hover: #eeeeee;
+  --borda:        #e0e0e0;
+  --borda-hover:  #c0c0c0;
+  --texto:        #111111;
+  --texto-muted:  #666666;
+  --texto-placeholder: #aaaaaa;
+  --verde:        #1D9E75;
+  --thumb:        #111111;
+  --track:        #e0e0e0;
+  --sombra:       0 4px 24px rgba(0,0,0,0.08);
+  --radius-card:  16px;
+  --radius-md:    10px;
+  --radius-sm:    6px;
+}
+
+/* =====================
+   Tema Escuro
+   ===================== */
+[data-tema="escuro"] {
+  --bg-pagina:    #0f0f0f;
+  --bg-card:      #1a1a1a;
+  --bg-campo:     #242424;
+  --bg-campo-hover: #2c2c2c;
+  --borda:        #2e2e2e;
+  --borda-hover:  #444444;
+  --texto:        #f0f0f0;
+  --texto-muted:  #888888;
+  --texto-placeholder: #555555;
+  --verde:        #22c98e;
+  --thumb:        #f0f0f0;
+  --track:        #2e2e2e;
+  --sombra:       0 4px 24px rgba(0,0,0,0.4);
+}
+
+/* =====================
+   Reset global
+   ===================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  overflow-x: hidden;
+  height: 100%;
+}
+
+body {
+  background: var(--bg-pagina);
+  transition: background 0.35s ease;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* =====================
+   Página — centraliza o card
+   ===================== */
+.pagina {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: var(--bg-pagina);
+  transition: background 0.35s ease;
+}
+
+/* =====================
+   Card principal
+   ===================== */
+.gerador {
+  width: 100%;
+  max-width: 420px;
+  padding: 2rem;
+  background: var(--bg-card);
+  border: 1px solid var(--borda);
+  border-radius: var(--radius-card);
+  box-shadow: var(--sombra);
+  color: var(--texto);
+  animation: entrar 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+@keyframes entrar {
+  from { opacity: 0; transform: translateY(16px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* =====================
+   Cabeçalho
+   ===================== */
+.gerador__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.gerador__titulo {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--texto);
+  margin-bottom: 4px;
+}
+
+.gerador__sub {
+  font-size: 0.875rem;
+  color: var(--texto-muted);
+}
+
+/* Botão de alternar tema */
+.gerador__btn-tema {
+  background: var(--bg-campo);
+  border: 1px solid var(--borda);
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+.gerador__btn-tema:hover {
+  background: var(--bg-campo-hover);
+  border-color: var(--borda-hover);
+  transform: rotate(20deg) scale(1.08);
+}
+
+/* =====================
+   Caixa da senha
+   ===================== */
+.gerador__senha-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-campo);
+  border: 1.5px solid var(--borda);
+  border-radius: var(--radius-md);
+  padding: 13px 14px;
+  margin-bottom: 4px;
+  min-height: 52px;
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.gerador__senha-box--copiado {
+  border-color: var(--verde);
+  background: var(--bg-campo);
+}
+
+.gerador__senha-texto {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--texto);
+  transition: color 0.2s;
+}
+
+.gerador__btn-copiar {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.125rem;
+  color: var(--texto-muted);
+  padding: 4px 6px;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+  line-height: 1;
+  transition: color 0.2s, background 0.2s, transform 0.15s;
+}
+
+.gerador__btn-copiar:hover:not(:disabled) {
+  color: var(--texto);
+  background: var(--borda);
+  transform: scale(1.15);
+}
+
+.gerador__btn-copiar:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+/* =====================
+   Feedback de cópia
+   ===================== */
+.gerador__feedback {
+  font-size: 0.75rem;
+  color: var(--verde);
+  height: 20px;
+  margin-bottom: 0.75rem;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.gerador__feedback--visivel {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =====================
+   Slider de tamanho
+   ===================== */
+.gerador__campo {
+  margin-bottom: 1.25rem;
+}
+
+.gerador__label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8125rem;
+  color: var(--texto-muted);
+  margin-bottom: 10px;
+}
+
+.gerador__label-valor {
+  font-weight: 600;
+  color: var(--texto);
+  font-size: 0.8125rem;
+  background: var(--bg-campo);
+  border: 1px solid var(--borda);
+  border-radius: 20px;
+  padding: 2px 10px;
+  transition: background 0.2s;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 5px;
+  border-radius: 3px;
+  background: var(--track);
+  outline: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--thumb);
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+
+.gerador__slider-extremos {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.6875rem;
+  color: var(--texto-placeholder);
+  margin-top: 5px;
+}
+
+/* =====================
+   Checkboxes
+   ===================== */
+.gerador__fieldset {
+  border: none;
+  padding: 0;
+  margin: 0 0 1.25rem;
+}
+
+.gerador__legend {
+  font-size: 0.8125rem;
+  color: var(--texto-muted);
+  margin-bottom: 10px;
+}
+
+.gerador__opcoes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.gerador__opt {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8125rem;
+  color: var(--texto-muted);
+  cursor: pointer;
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.15s;
+  user-select: none;
+}
+
+.gerador__opt:hover {
+  background: var(--bg-campo);
+  transform: translateY(-1px);
+}
+
+.gerador__opt--ativo {
+  background: var(--bg-campo);
+  border-color: var(--borda);
+  color: var(--texto);
+}
+
+.gerador__opt input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: var(--thumb);
+  flex-shrink: 0;
+}
+
+/* =====================
+   Botão Gerar
+   ===================== */
+.gerador__btn-gerar {
+  width: 100%;
+  padding: 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--borda);
+  background: var(--bg-campo);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--texto);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s, box-shadow 0.15s;
+}
+
+.gerador__btn-gerar:hover:not(:disabled) {
+  background: var(--bg-campo-hover);
+  border-color: var(--borda-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.gerador__btn-gerar:active:not(:disabled) {
+  transform: translateY(0) scale(0.98);
+  box-shadow: none;
+}
+
+.gerador__btn-gerar:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.gerador__btn-icone {
+  display: inline-block;
+  font-size: 1rem;
+  transition: transform 0.4s ease;
+}
+
+.gerador__btn-gerar:hover .gerador__btn-icone {
+  transform: rotate(180deg);
+}
+
+/* =====================
+   Responsivo
+   ===================== */
+@media (max-width: 480px) {
+  .gerador {
+    padding: 1.5rem 1.25rem;
+    border-radius: 12px;
+  }
+
+  .gerador__opcoes {
+    grid-template-columns: 1fr;
+  }
+
+  .gerador__titulo {
+    font-size: 1.125rem;
+  }
+}

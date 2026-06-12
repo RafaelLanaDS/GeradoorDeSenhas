@@ -1,0 +1,33 @@
+.barra-forca {
+  margin-bottom: 1.25rem;
+}
+
+.barra-forca__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.barra-forca__label {
+  font-size: 0.8125rem;
+  color: var(--texto-muted);
+}
+
+.barra-forca__nivel {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  transition: color 0.4s ease;
+}
+
+.barra-forca__segmentos {
+  display: flex;
+  gap: 5px;
+}
+
+.barra-forca__seg {
+  flex: 1;
+  height: 5px;
+  border-radius: 3px;
+  transition: background 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
